@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Excel File</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Vibrant gradient background */
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid #ddd;
+        }
+        .form-header {
+            border-bottom: 4px solid #ff6f61; /* Accent color */
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .form-header h1 {
+            color: #333;
+            font-size: 26px;
+            font-weight: 700;
+        }
+        .btn-primary {
+            background-color: #ff6f61; /* Vibrant button color */
+            border: none;
+            padding: 14px 24px;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #e55b5b; /* Darker shade on hover */
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        .btn-primary:focus, .btn-primary:active {
+            box-shadow: 0 0 0 0.2rem rgba(255, 105, 97, 0.5);
+        }
+        .form-label {
+            font-weight: 600;
+            color: #555;
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border-color: #ddd;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 0 0.2rem rgba(255, 105, 97, 0.25);
+        }
+        .error-message {
+            color: #dc3545;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .custom-textarea {
+            height: 150px;
+        }
+        .custom-select {
+            height: calc(2.5rem + 2px);
+        }
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+            .btn-primary {
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8 form-container">
+                <div class="form-header">
+                    <h1 class="text-center mb-0">Upload Excel File</h1>
+                </div>
+                {% if error %}
+                    <div class="alert alert-danger error-message" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="{{ form.file.id_for_label }}" class="form-label">{{ form.file.label }}</label>
+                        {{ form.file }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.email_to.id_for_label }}" class="form-label">{{ form.email_to.label }}</label>
+                        {{ form.email_to }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.user_name.id_for_label }}" class="form-label">{{ form.user_name.label }}</label>
+                        {{ form.user_name }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.email_body.id_for_label }}" class="form-label">{{ form.email_body.label }}</label>
+                        {{ form.email_body }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.image_type.id_for_label }}" class="form-label">{{ form.image_type.label }}</label>
+                        {{ form.image_type }}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Upload and Send Email</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
